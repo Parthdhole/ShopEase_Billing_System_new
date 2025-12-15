@@ -1,0 +1,30 @@
+.navbar.navbar-dark {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    margin-right: 1rem !important;
+}
+
+.nav-link:hover {
+    color: #ccc !important;
+}
+
+.nav-link.active {
+    color: #fff !important;
+}
+
+.form-control {
+    border-radius: 20px !important;
+}
+
+.btn-outline-light {
+    border-radius: 0 20px 20px 0;
+}

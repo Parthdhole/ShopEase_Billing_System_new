@@ -1,0 +1,14 @@
+# ===== BACKEND (Spring Boot) =====
+backend/target/
+backend/src/main/resources/application.properties
+
+# ===== FRONTEND =====
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+
+# ===== IDE / OS =====
+.idea/
+.vscode/
+*.log
+.DS_Sto
