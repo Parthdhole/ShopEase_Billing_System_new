@@ -4,6 +4,7 @@ package com.shop.ease.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,20 +22,28 @@ public class JwtUtil {
 	
 	@Value("${jwt.secret.key}")
      private String SECRET_KEY;
+//	protected boolean shouldNotFilter(HttpServletRequest request) {
+//	    // Skip JWT validation on login endpoint
+//	    return request.getServletPath().equals("/login") 
+//	    		|| request.getServletPath().equals("/encode");
+//	}
 
 	 public String generateToken(UserDetails userDetails) {
 	        Map<String, Object> claims = new HashMap<>();
+	        claims.put("role", "ROLE_ADMIN");
 	        return createToken(claims, userDetails.getUsername());
+	      
 	    }
 
 	    private String createToken(Map<String, Object> claims, String subject) {
 	        return Jwts.builder()
 	                .setClaims(claims)
 	                .setSubject(subject)
+	                .setHeaderParam("typ", "JWT")           
 	                .setIssuedAt(new Date(System.currentTimeMillis()))
 	                // Token valid for 10 hours
 	                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-	                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+	                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)//header+payload+signature
 	                .compact();
 	    }
 

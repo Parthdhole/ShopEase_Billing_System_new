@@ -7,6 +7,7 @@ import java.util.List;
 import com.shop.ease.io.UserRequest;
 import com.shop.ease.io.UserResponce;
 
+
 public interface UserService {
 	
 	UserResponce createUser(UserRequest request);

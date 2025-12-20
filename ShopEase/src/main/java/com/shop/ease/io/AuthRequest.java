@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// Keep existing getter, add @Data for setters and @NoArgsConstructor for Jackson
 @Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class AuthRequest {
-
-	private String eamil;
+	private String email;
 	private String password;
 }
 

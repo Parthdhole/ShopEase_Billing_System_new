@@ -22,9 +22,31 @@ public class AppUserDetailesService implements  UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		 System.out.println("👤 loadUserByUsername called with: " + email);
 			UserEnitity existinguser=userepository.findByEmail(email)
 		.orElseThrow(()->new UsernameNotFoundException("Email not foun for the eamil"+email));
-			return new User(existinguser.getEmail(),existinguser.getPassword(),Collections.singleton(new SimpleGrantedAuthority(existinguser.getRole())));
+		    String role = existinguser.getRole();
+		    System.out.println("🔑 DB ROLE: " + role);
+		    if (role == null || role.isBlank()) {
+		        role = "ROLE_USER";
+		    }
+
+		    if (!role.startsWith("ROLE_")) {
+		        role = "ROLE_" + role;
+		    }
+		    
+			return new User(
+					existinguser.getEmail(),
+					existinguser.getPassword(),
+					Collections.singleton(new SimpleGrantedAuthority(role)));
+
+//		    System.out.println("🔑 DB ROLE: " + existinguser.getRole());
+//			return new User(existinguser.getEmail(),existinguser.getPassword(),Collections.singleton(new SimpleGrantedAuthority(existinguser.getRole()
+//					
+//					)));
+			
+//			return new User(existinguser.getEmail(),existinguser.getPassword(),Collections.singleton(new SimpleGrantedAuthority(springRole)));
+
 			
 		
 		

@@ -1,6 +1,6 @@
 package com.shop.ease.io;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class UserResponce {
 	private String name;
 	private String email;
 	private String password;
-	private Timestamp createAt;
+	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private String role;
 	

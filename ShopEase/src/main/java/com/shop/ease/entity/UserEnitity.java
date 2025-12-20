@@ -1,11 +1,10 @@
 package com.shop.ease.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +30,7 @@ public class UserEnitity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(unique = true)
-	private String user_id;
+	private String userid;
 	private  String email;
 	private  String password;
 	private String role;
