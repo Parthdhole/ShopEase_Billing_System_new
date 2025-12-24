@@ -12,6 +12,7 @@ import com.shop.ease.entity.CategoryEntity;
 import com.shop.ease.io.CategoryRequest;
 import com.shop.ease.io.CategoryResponse;
 import com.shop.ease.repository.CategoryRepository;
+import com.shop.ease.repository.ItemRepository;
 import com.shop.ease.service.CategoryService;
 import com.shop.ease.service.FileUploadService;
 
@@ -30,9 +31,12 @@ public  class CategoryServiceImpl implements CategoryService{
     this.fileUploadService = fileUploadService;
 }v
 	 */
+	
 	private final  CategoryRepository repository; 
 	
 	private final FileUploadService fileUploadService;
+	
+	private final ItemRepository itemRepository;
 	@Override
 	public CategoryResponse addCategory(CategoryRequest request,MultipartFile file) {
     String imgUrl=fileUploadService.uplodaFile(file);
@@ -45,6 +49,8 @@ public  class CategoryServiceImpl implements CategoryService{
 
 	private CategoryResponse covertToResponse(CategoryEntity newCategoryEntity) {
 		// TODO Auto-generated method stub
+		// how many count are present for particular category id
+	Integer itemsCount=	itemRepository.countByCategoryId(newCategoryEntity.getId());
 		return CategoryResponse.builder()
 				 .catagoryId(newCategoryEntity.getCategoryId())
 		         .name(newCategoryEntity.getName())
@@ -53,6 +59,7 @@ public  class CategoryServiceImpl implements CategoryService{
 		         .imgUrl(newCategoryEntity.getImgUrl())
 		         .createdAt(newCategoryEntity.getCreateAT())
 		         .UpdatedAt(newCategoryEntity.getUpdatedAt())
+		         .items(itemsCount)
 		         .build();
 		
 	}
