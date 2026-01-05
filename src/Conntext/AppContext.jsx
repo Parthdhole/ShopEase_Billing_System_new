@@ -6,6 +6,7 @@ export const AppContxt = createContext(null);
 
 export const AppContxtProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
+  const[auth,setAuth]=useState({token:null,role:null});
 
   useEffect(() => {
     async function loadData() {
@@ -14,9 +15,14 @@ export const AppContxtProvider = ({ children }) => {
     }
     loadData();
   }, []);
+  const setAuthdata=(token,role)=>{
+    setAuth({token,role});
+  }
     const contextValue = {
         categories,  // make sure this matches the key you use in useContext
-        setCategories
+        setCategories,
+        auth,
+        setAuthdata
     };
 
   return (
