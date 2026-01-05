@@ -1,0 +1,41 @@
+ .category-image{
+    width: 60px;
+    height: 60px;
+    border-radius: 120px;
+    boarder: 3px solid white;
+}
+
+.category-list {
+  padding: 10px 0;
+}
+
+.category-list .card  {
+  position: relative;
+  border-radius: 10px;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.category-list .card:hover {
+  transform: translateY(-3px);
+}
+
+.category-list .category-image {
+  width: 75px;
+  height: 80px;
+  border-radius: 100%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.category-list .btn-danger {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
