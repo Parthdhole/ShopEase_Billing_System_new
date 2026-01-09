@@ -1,12 +1,53 @@
-import UserList from "../Userlist/UserList";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { addUser } from "../../Service/UserService";
 
-const UserForm=()=>{
+const UserForm=({setUsers})=>{
+  const[loading,setLoading]=useState(false);
+  const[data,setData]=useState({
+    name:"",
+    email:"",
+    password:"",
+    role :"ROLE_USER"
+  });
+
+    // handle input change
+  const onChangeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
+  const onSubmitHandler = async(e) => {
+    e.preventDefault();
+    setLoading(true);
+  try{
+  const response= await addUser(data);
+  setUsers((prevUsers)=>[...prevUsers,response.data]);
+  toast.success("User created successfully");
+  setData({
+    name:"",
+    email:"",
+    password:"",
+    role :""
+  });
+  setLoading(false);
+  }
+  catch(error){
+    console.error("Error creating user",error);
+
+  }
+  finally{  
+    setLoading(false);
+}
+  
+  };
+
     return(
-        <div>
   <div className="mx-2 mt-2">
       <div className="row">
-        <div className="card col-md-8 form-container">
+        <div className="card col-md-12 form-container">
           <div className="card-body">
+              <form onSubmit={onSubmitHandler}>
             {/* Category Name */}
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Name</label>
@@ -16,6 +57,9 @@ const UserForm=()=>{
                 id="name"
                 className="form-control"
                 placeholder="Jhon doe"
+                onChange={onChangeHandler}
+                value={data.name}
+
               />
             </div>
               <div className="mb-3">
@@ -26,9 +70,11 @@ const UserForm=()=>{
                 id="email"
                 className="form-control"
                 placeholder="Yourname@examole.com"
+                onChange={onChangeHandler}
+                value={data.email}
               />
             </div>
-            </div>
+          
               <div className="mb-3">
               <label htmlFor="password" className="form-label">Password</label>
               <input
@@ -37,23 +83,20 @@ const UserForm=()=>{
                 id="password"
                 className="form-control"
                 placeholder="************"
+                onChange={onChangeHandler}
+                value={data.password}
+
               />
             </div>
            
-            <div className="mb-3">
-                <label htmlFor="bgcolor" className="form-label">Background color</label>
-                <br/>
-                <input type="color" 
-                name="bgcolor" 
-                id="bgcolor"
-                 placeholder="#ffff"/>
-            </div>
-            <button type="submit" className="btn btn-warning w-100">Save</button>
-
+              <button type="submit" className="btn btn-warning w-100" disabled={loading}>
+              {loading ? "Loading..." : "Save"}
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    )
-}
+    );
+};
 export default UserForm;
