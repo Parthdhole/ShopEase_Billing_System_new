@@ -25,7 +25,7 @@ const Menubar =()=>{
                 <Link className="nav-link" to="/category">Manage Categories</Link>
             </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/users">Mangae Users</Link>
+                <Link className="nav-link" to="/users">Manage Users</Link>
             </li>
         </ul>
        {/**

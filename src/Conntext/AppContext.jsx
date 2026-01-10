@@ -1,17 +1,19 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchCategories } from "../Service/CategoryService";
-
+import { fetchItems } from "../Service/ItemService.js";
 
 export const AppContxt = createContext(null);
 
 export const AppContxtProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const[auth,setAuth]=useState({token:null,role:null});
-
+  const [itemsData, setItemsData] = useState([]);
   useEffect(() => {
     async function loadData() {
         const response = await fetchCategories();
+       const itemResponse= await fetchItems();
         setCategories(response.data);
+        setItemsData(itemResponse.data);
     }
     loadData();
   }, []);
@@ -22,7 +24,10 @@ export const AppContxtProvider = ({ children }) => {
         categories,  // make sure this matches the key you use in useContext
         setCategories,
         auth,
-        setAuthdata
+        setAuthdata,
+        itemsData,
+        setItemsData
+
     };
 
   return (
