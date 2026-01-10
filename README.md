@@ -1,1 +1,1 @@
-                                                                                            ShopEase_Billing_System project
+                                                                    ShopEase_Billing_System project
