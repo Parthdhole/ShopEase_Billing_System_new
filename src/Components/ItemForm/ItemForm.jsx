@@ -6,7 +6,7 @@ import { addItem } from "../../Service/ItemService";
 
 
 const ItemForm = () => {
-    const {categories,setItemsData,items}=useContext(AppContxt);
+    const {categories,setItemsData,itemsData,setCatrgories}=useContext(AppContxt);
     const [image , setImage] = useState(false);
     const [loading,setLoading]=useState(false);
     const [data,setData]=useState({
@@ -38,10 +38,11 @@ const ItemForm = () => {
         console.log("Submitting item:", data, "image:", image);
         const response= await addItem(fromData);
         if(response.status===201){
-
-          setItemsData((items)=>[...items,response.data]);
-          //TODO:upaate the category state
-          toast.success("Item added successfully");
+        toast.success("Item added successfully"); 
+          setItemsData([...itemsData,response.data]);
+         
+          setCatrgories((prevCategories)=>prevCategories.map((category)=>category.categoryId===data.categoryId?{...category,items:category.items+1}:category)); 
+          
           setData({
             name:"",
             categoryId:"",
