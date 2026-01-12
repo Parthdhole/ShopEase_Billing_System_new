@@ -5,6 +5,11 @@ import { fetchItems } from "../Service/ItemService.js";
 export const AppContxt = createContext(null);
 
 export const AppContxtProvider = ({ children }) => {
+  if(localStorage.getItem("token") && localStorage.getItem("role")===null){
+    setAuthdata(
+      localStorage.getItem("token")),
+      localStorage.getItem("role")
+  };
   const [categories, setCategories] = useState([]);
   const[auth,setAuth]=useState({token:null,role:null});
   const [itemsData, setItemsData] = useState([]);
