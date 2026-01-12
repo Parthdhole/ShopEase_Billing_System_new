@@ -76,7 +76,7 @@ const CategoryList = () => {
 
                   <div className="flex-grow-1">
                     <h5 className="mb-1 text-black">{category.name}</h5>
-                    <p className="mb-0 text-black">5 Items</p>
+                    <p className="mb-0 text-black">{category.items}  Items</p>
 
                     <button
                       className="btn btn-danger btn-sm mt-2"

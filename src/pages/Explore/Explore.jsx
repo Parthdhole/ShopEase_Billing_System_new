@@ -1,6 +1,9 @@
+import DisplayCategory from "../../Components/DisplayCategory/DisplayCategory";
 import { useContext } from "react";
 import { AppContxt } from "../../Conntext/AppContext";
 import "./Explore.css";
+
+
 
 const Explore = () => {
   const { categories } = useContext(AppContxt);
@@ -12,9 +15,12 @@ const Explore = () => {
       <div className="left-column">
         <div className="firstrow" style={{ overflow: "auto" }}>
           {categories.length > 0 ? (
-            categories.map((cat) => <div key={cat.id}>{cat.name}</div>)
+            // categories.map((cat) => <div key={cat.id}>{cat.name}</div>)
+                        <DisplayCategory categories={categories} />
+
           ) : (
-            <p>categories found</p>
+              <p className="text-white">No categories found</p>
+
           )}
         </div>
 
